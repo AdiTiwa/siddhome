@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRATE ALBUM :DDD</title>
+</head>
+<body>
+    <form method="post">
+        <label for="id">ID</label>
+        <br>
+        <input type = "text" name = "id" placeholder="Have you ever had a dream that that you um you had you'd you would you could you'd do you wi you wants you you could do so you you'd do you could you you want you want him to do you so much you could do anything?" value="{{ request.form['id'] }}"></input>
+        <br>
+        <label for="timestamp">TIMESTAMP REPLACE OR NAH</label>
+        <br>
+        <input type="checkbox" name="timestamp" checked>
+        <br>
+        <label for="title">Title</label>
+        <br>
+        <input type="text" name="title" placeholder="Message title" value="{{ request.form['title'] }}"></input>
+        <br>
+        <label for="subtitle">Subtitle</label>
+        <br>
+        <input type="text" name="subtitle" placeholder="Message title" value="{{ request.form['subtitle'] }}"></input>
+        <br>
+        <label for="content">Images (they're split by spaces or newlines i think work too :D)</label>
+        <br>
+        <textarea name="content" placeholder="Have you ever had a dream that that you um you had you'd you would you could you'd do you wi you wants you you could do so you you'd do you could you you want you want him to do you so much you could do anything?" rows="15" cols="60">{{ request.form['content'] }}</textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

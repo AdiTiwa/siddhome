@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRIHJ SJDGHNLKFSJGBN</title>
+</head>
+<body>
+    <form method="post">
+        <label for="title">Title</label>
+        <br>
+        <input type="text" name="title" placeholder="Message title" value="{{ request.form['title'] }}"></input>
+        <br>
+        <label for="subtitle">Subtitle</label>
+        <br>
+        <input type="text" name="subtitle" placeholder="Message title" value="{{ request.form['subtitle'] }}"></input>
+        <br>
+        <label for="tags">Tags, separate with commas or spaces (idc i think it does both??)</label>
+        <br>
+        <input type="text" name="tags" placeholder="Message title" value="{{ request.form['tags'] }}"></input>
+        <br>
+        <label for="imgurl">Image URL</label>
+        <br>
+        <input type="text" name="imgurl" placeholder="Message title" value="{{ request.form['imgurl'] }}"></input>
+        <br>
+        <label for="content">Message Content</label>
+        <br>
+        <textarea name="content" placeholder="Message content" rows="15" cols="60">{{ request.form['content'] }}</textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
