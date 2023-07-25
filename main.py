@@ -1,11 +1,11 @@
 import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import credentials, firestore, storage
 from flask import app, render_template, Flask, request, flash
 import os
 import datetime
 
 cred = credentials.Certificate('./firebase.json')
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, {'storageBucket': 'home-1b4e9.appspot.com'})
 db = firestore.client()
 
 def create_document(collection, document_data):
@@ -17,6 +17,16 @@ def update_document(collection, document_id, document_data):
     doc_ref = db.collection(collection).document(document_id)
     doc_ref.update(document_data)
     return doc_ref
+
+def upload_file(fileName):
+    bucket = storage.bucket()
+    blob = bucket.blob(fileName)
+    blob.upload_from_filename(fileName)
+
+    # Opt : if you want to make public access from the URL
+    blob.make_public()
+
+    return blob.public_url
 
 app = Flask(__name__)
 
@@ -119,6 +129,23 @@ def update_album():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+  
+@app.route('/upload')  
+def upload():  
+    return render_template("upload.html")  
+  
+@app.route('/uploaded', methods = ['POST'])  
+def success():  
+    if request.method == 'POST':  
+        f = request.files['file']
+        f.save(f.filename)
+        filePath = upload_file(f.filename)
+        os.remove(f.filename)
+        return render_template("uploaded.html", path = filePath)  
+  
+if __name__ == '__main__':  
+    app.run(debug=True)
 
 port = int(os.environ.get('PORT', 8080))
 if __name__ == '__main__':
